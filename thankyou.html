@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Thank You</title>
+<!-- Load Poppins Font for clean typography -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Base Reset and Setup */
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    /* Use min-height: 100vh to ensure it fills the screen but allows scrolling */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Use padding to ensure content doesn't touch the edges of the screen */
+    padding: 2rem 1rem; 
+    margin: 0;
+    background-color: #f0f4f8; /* Soft blue-gray background */
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+  }
+
+  header {
+    font-size: 1.25rem; /* 20px */
+    margin-bottom: 1rem;
+    font-weight: 600;
+    text-align: center;
+    color: #333;
+  }
+
+  .thankyou-box {
+    width: 100%;
+    max-width: 480px; /* Slightly wider max-width for better desktop look */
+    text-align: center;
+    padding: 2.5rem 2rem; /* 40px 32px */
+    border-radius: 1rem; /* 16px */
+    background: white;
+    /* Modern, soft shadow */
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 0 10px 0 rgba(0, 0, 0, 0.04); 
+    /* Ensures box content is centered when body is flex-start (better for scrolling) */
+    margin-top: auto; 
+    margin-bottom: auto;
+  }
+
+  .thankyou-box h1 {
+    font-size: 1.75rem; /* 28px */
+    color: #10b981; /* Tailwind Emerald Green for success */
+    margin-bottom: 0.5rem;
+  }
+
+  .thankyou-box p {
+    font-size: 1rem; /* 16px */
+    color: #4b5563;
+    margin-bottom: 1rem;
+  }
+  
+  /* Form Elements */
+  form {
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  label {
+    display: block;
+    text-align: left;
+    margin-bottom: 0.375rem; /* 6px */
+    font-size: 0.875rem; /* 14px */
+    font-weight: 600;
+    color: #374151;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    padding: 0.75rem; /* 12px */
+    border-radius: 0.5rem; /* 8px */
+    border: 1px solid #d1d5db;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  
+  input[type="text"]:focus {
+    outline: none;
+    border-color: #3b82f6; /* Tailwind Blue */
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+  }
+
+  button {
+    margin-top: 1.5rem; /* 24px */
+    padding: 0.75rem 1.25rem; /* 12px 20px */
+    border-radius: 0.5rem; /* 8px */
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    background: #3b82f6; /* Tailwind Blue */
+    color: white;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.2s, transform 0.1s;
+  }
+
+  button:hover {
+    background: #2563eb;
+  }
+
+  button:active {
+    transform: scale(0.99);
+  }
+
+  /* Responsive Adjustments (Mobile Optimization) */
+  @media (max-width: 600px) {
+    body {
+      padding: 1rem 0.5rem; /* Reduce padding on very small screens */
+    }
+    
+    .thankyou-box {
+      padding: 1.5rem; /* Smaller padding inside the box on mobile */
+    }
+    
+    .thankyou-box h1 {
+      font-size: 1.5rem; /* Smaller heading */
+    }
+    
+    .thankyou-box p {
+      font-size: 0.9rem; /* Smaller text */
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  Thank you!
+</header>
+
+<div class="thankyou-box">
+  <h1>✅ Survey Complete!</h1>
+  <p>You are now an official candidate for this raffle.</p>
+  <p>Please enter your Facebook link — we will contact you if you win.</p>
+
+  <form id="submitForm"
+        action="https://docs.google.com/forms/d/e/1FAIpQLSfm3hvexjSWoNOPjyRDeeY-bXE3fJsDgEJmpekj0udfwHXBrA/formResponse"
+        method="POST"
+        target="_self">
+
+    <input type="hidden" name="entry.281574769" id="userIdField">
+
+    <label for="facebookLink">Facebook Profile Link</label>
+    <input type="text" 
+           name="entry.51650144" 
+           id="facebookLink"
+           placeholder="https://facebook.com/yourprofile" 
+           required>
+
+    <button type="submit">Submit Raffle Entry</button>
+
+  </form>
+</div>
+
+<script>
+// Function to handle the Firebase setup and user ID fetching/clearing logic
+function setupPage() {
+    // Prefill userId from URL (?userId=xxxx)
+    const params = new URLSearchParams(window.location.search);
+    const userId = params.get("userId") || "";
+    const userIdField = document.getElementById("userIdField");
+
+    if (userIdField) {
+      userIdField.value = userId;
+    }
+    
+    // Clear navigation state on final screen (localStorage dependency is assumed from original code)
+    try {
+        localStorage.removeItem("answeredPins");
+        localStorage.removeItem("selectedPages");
+        localStorage.removeItem("currentPageIndex");
+        console.log("Navigation state cleared.");
+    } catch (e) {
+        console.error("Error clearing localStorage:", e);
+    }
+}
+
+// Wait for the DOM to load before running setup
+document.addEventListener('DOMContentLoaded', setupPage);
+</script>
+
+</body>
+</html>

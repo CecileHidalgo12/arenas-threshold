@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Google Form Modal</title>
+
+<!-- ✅ IMPORT YOUR SURVEY CSS -->
+<link rel="stylesheet" href="survey.css" />
+
+</head>
+<body>
+
+<!-- BUTTON TO OPEN THE MODAL -->
+<button id="openSurveyBtn" style="margin: 20px;">Open Survey</button>
+
+<!-- ✅ GOOGLE FORM MODAL -->
+<div class="form-modal" id="surveyModal">
+
+  <div class="form-content">
+
+    <!-- HEADER -->
+   
+
+    <form id="concertForm"
+      action="https://docs.google.com/forms/d/e/1FAIpQLSeSSoXOXnA5RTxGd7mrSv7R4xrChig4ZvF0sgIV6XAeqdibLA/formResponse"
+      method="POST"
+      target="hidden_iframe">
+
+      <!-- ✅ SHORT ANSWER - USER ID -->
+      <label>User ID</label>
+      <input type="text" name="entry.1492501214" required />
+
+      <div class="form-divider"></div>
+
+      <!-- ✅ LINEAR SCALE (Arrival Time) -->
+      <label>Arrival time at the venue</label>
+      <div class="options2">
+        <label><input type="radio" name="entry.1451106633" value="1" required />1</label>
+        <label><input type="radio" name="entry.1451106633" value="2" />2</label>
+        <label><input type="radio" name="entry.1451106633" value="3" />3</label>
+        <label><input type="radio" name="entry.1451106633" value="4" />4</label>
+        <label><input type="radio" name="entry.1451106633" value="5" />5</label>
+      </div>
+
+      <!-- ✅ LINEAR SCALE (Attendance) -->
+      <label>How many times have you attended a concert in this venue?</label>
+      <div class="options2">
+        <label><input type="radio" name="entry.649188054" value="1" required />1</label>
+        <label><input type="radio" name="entry.649188054" value="2" />2</label>
+        <label><input type="radio" name="entry.649188054" value="3" />3</label>
+        <label><input type="radio" name="entry.649188054" value="4" />4</label>
+        <label><input type="radio" name="entry.649188054" value="5" />5</label>
+      </div>
+
+      <!-- ✅ LINEAR SCALE (Ticket Class) -->
+      <label>Ticket Class</label>
+      <div class="options2">
+        <label><input type="radio" name="entry.1672915331" value="1" required />1</label>
+        <label><input type="radio" name="entry.1672915331" value="2" />2</label>
+        <label><input type="radio" name="entry.1672915331" value="3" />3</label>
+        <label><input type="radio" name="entry.1672915331" value="4" />4</label>
+        <label><input type="radio" name="entry.1672915331" value="5" />5</label>
+      </div>
+
+      <!-- ✅ LINEAR SCALE (Age) -->
+      <label>Age</label>
+      <div class="options2">
+        <label><input type="radio" name="entry.1182387914" value="1" required />1</label>
+        <label><input type="radio" name="entry.1182387914" value="2" />2</label>
+        <label><input type="radio" name="entry.1182387914" value="3" />3</label>
+        <label><input type="radio" name="entry.1182387914" value="4" />4</label>
+        <label><input type="radio" name="entry.1182387914" value="5" />5</label>
+      </div>
+
+      <!-- ✅ LINEAR SCALE (Gender) -->
+      <label>Gender</label>
+      <div class="options2">
+        <label><input type="radio" name="entry.1399574321" value="1" required />1</label>
+        <label><input type="radio" name="entry.1399574321" value="2" />2</label>
+        <label><input type="radio" name="entry.1399574321" value="3" />3</label>
+        <label><input type="radio" name="entry.1399574321" value="4" />4</label>
+        <label><input type="radio" name="entry.1399574321" value="5" />5</label>
+      </div>
+
+      <div class="form-divider"></div>
+
+      <!-- ✅ SHORT ANSWER (Place of Origin) -->
+      <label>Place of Origin</label>
+      <input type="text" name="entry.2027647080" required />
+
+      <div class="form-footer">
+        <button type="submit" class="submit-btn">Submit</button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<!-- Hidden iframe (prevents google redirect) -->
+<iframe name="hidden_iframe" style="display:none;"></iframe>
+
+<script>
+// ✅ Open Modal
+document.getElementById("openSurveyBtn").addEventListener("click", () => {
+  document.getElementById("surveyModal").classList.add("active");
+});
+
+
+// ✅ Automatically close modal after submit
+document.getElementById("concertForm").addEventListener("submit", function () {
+  setTimeout(() => {
+    document.getElementById("surveyModal").classList.remove("active");
+    alert("✅ Thank you! Your response has been submitted.");
+  }, 600);
+});
+</script>
+
+</body>
+</html>

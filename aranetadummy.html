@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Map with Pins</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .map-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .map-container img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .pin {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      background: red;
+      border-radius: 50%;
+      border: 2px solid white;
+      cursor: pointer;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Small popup form */
+    .popup-form {
+      display: none; /* Hidden initially */
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 400px;
+      height: 500px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      z-index: 999;
+      padding: 10px;
+    }
+
+    .popup-form iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 8px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      cursor: pointer;
+    }
+
+    .close-btn:hover {
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <h1>Click a Pin to Evaluate</h1>
+
+  <div class="map-container">
+    <img src="map.jpg" alt="Map">
+
+    <!-- Pins -->
+    <div class="pin" style="top: 30%; left: 40%;" onclick="openForm('Stairs')" title="Stairs"></div>
+    <div class="pin" style="top: 50%; left: 60%;" onclick="openForm('Elevator')" title="Elevator"></div>
+    <div class="pin" style="top: 70%; left: 20%;" onclick="openForm('MOA')" title="MOA"></div>
+  </div>
+
+  <!-- Small Popup Form -->
+  <div id="popupForm" class="popup-form">
+    <span class="close-btn" onclick="closeForm()">&times;</span>
+    <iframe id="gform" src=""></iframe>
+  </div>
+
+  <script>
+    function openForm(pinName) {
+      const iframe = document.getElementById('gform');
+      iframe.src = "https://docs.google.com/forms/d/e/1FAIpQLSe03zuOBPuEBPbGQM1O4I6zI0p8JkhcrRVii2J6t7MvyNaoXg/viewform?embedded=true&entry.137320180=" + encodeURIComponent(pinName);
+      document.getElementById('popupForm').style.display = 'block';
+    }
+
+    function closeForm() {
+      const iframe = document.getElementById('gform');
+      iframe.src = '';
+      document.getElementById('popupForm').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
